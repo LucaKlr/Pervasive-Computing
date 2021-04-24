@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+/* Schriftart */
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* Hintergrund */
+.bg {
+    /* The image used
+    background-image: url("Gebaeude.jpg");
+
+     */
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.center {
+    margin: auto;
+}
+
+.checkbox-label {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+.checkbox-input {
+    display: inline-block;
+}
+
+.checkbox-div {
+    margin: auto;
+}
+
+#eyeLogin {
+    position: absolute;
+    bottom: 30%;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+#eyeKonto {
+    position: absolute;
+    bottom: 30%;
+    right: 5px;
+    width: 24px;
+    height: 35px;
+}
+
+
+
+
+
