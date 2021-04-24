@@ -19,18 +19,31 @@
     {% block title %}
     {% endblock title %}
 </head>
-{% block pic %}
-    <body>
-{% endblock pic %}
 
+<body>
 <!-- NAVBAR -->
 <header class="mb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="https://www.hft-stuttgart.de/" target="_blank">
-                <img src="{% static 'img/logo.png' %}" alt="HFT" width="68" height="53"> <span
-                    style="margin-left: 10px">Herzlich willkommen</span>
+                <img src="{% static 'img/logo.png' %}" alt="HFT" width="68" height="53">
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <div class="d-flex">
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            {% block kontonav %}
+                            {% endblock kontonav %}
+                            <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
@@ -44,17 +57,5 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
 
-<!-- Passwort-Funktion -->
-<script>
-    function showpw() {
-        let x = document.getElementById("floatingPassword");
-        let icon = document.getElementById('#eye');
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
-</script>
 </body>
 </html>
