@@ -48,3 +48,4 @@ def pruefungstabelle(request):
 
 def studententabelle(request):
     return render(request, 'hftchekin/studententabelle.html')
+
