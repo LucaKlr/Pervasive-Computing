@@ -6,6 +6,7 @@ from hftcheckin.models import *
 
 def login(request):
     student = Student.objects.all()
+    professor = Professor.objects.all()
     context = {'student': student}
     return render(request, 'hftchekin/login.html', context)
 
