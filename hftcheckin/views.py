@@ -49,3 +49,7 @@ def pruefungstabelle(request):
 
 def studententabelle(request):
     return render(request, 'hftchekin/studententabelle.html')
+
+
+def geschriebenuebersicht(request):
+    return render(request, 'hftchekin/geschriebenuebersicht.html')

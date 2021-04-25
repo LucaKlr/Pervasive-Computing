@@ -55,22 +55,30 @@
                                             </div>
                                         </div>
                                         <div class="checkbox-div text-center my-2">
+                                            <!--
                                             <button type="button" id="start_btn" onclick="start()"
                                                     class="btn btn-outline-danger mt-2">
                                                 Start
                                             </button>
+                                            -->
+                                            <!-- Button für stoppen der Zeit ersetzt siehe Zeile 76-79-->
+                                            <!--
                                             <button type="button" id="pause_btn" onclick="pause()"
                                                     class="btn btn-outline-danger mt-2">
                                                 Stop
                                             </button>
+                                            -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <br>
-                            <!-- Fertig/Checkout -->
+                            <!-- Fertig/Checkout & Timer stoppen-->
+                            <!-- Timer stoppen testen: type="submit" zu type="button" ändern-->
                             <div class="text-center">
-                                <button type="submit" class="btn btn-outline-danger mt-2">Fertig</button>
+                                <button type="submit" onclick="pause()" id="pause_btn"
+                                        class="btn btn-outline-danger mt-2">Fertig
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -104,6 +112,9 @@
             showBtn([pause_btn]);
         }
 
+        <!-- Stopuhr beim Aufruf der Seite starten-->
+        window.onload = start();
+
         function pause() {
             if (interval) {
                 clearInterval(interval);
@@ -126,12 +137,15 @@
             return hours + ':' + minutes + ':' + seconds;
         }
 
+        <!--
         function showBtn(btnArr) {
             btnArr.forEach((btn) => (btn.style.display = 'inline-block'));
         }
-
+        -->
+        <!--
         function hideBtn(btnArr) {
             btnArr.forEach((btn) => (btn.style.display = 'none'));
         }
+        -->
     </script>
 {% endblock body %}

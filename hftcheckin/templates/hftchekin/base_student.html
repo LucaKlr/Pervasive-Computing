@@ -37,9 +37,12 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <div class="d-flex">
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            {% block homenav %}
+                            {% endblock homenav %}
                             {% block kontonav %}
                             {% endblock kontonav %}
-                            <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+                            {% block logoutnav %}
+                            {% endblock logoutnav %}
                         </div>
                     </div>
                 </ul>
