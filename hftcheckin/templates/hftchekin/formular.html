@@ -81,13 +81,14 @@
                             <div class="checkbox-div text-center">
                                 <input class="form-check-input checkbox-input" type="checkbox" id="agb" required>
                                 <label class="form-check-label checkbox-label" for="agb">
-                                    Hiermit bestätige ich die Teilnahme zur Prüfung
+                                    Teilnahme zur Prüfung bestätigen
                                 </label>
                                 <br>
                                 <input class="form-check-input checkbox-input" type="checkbox" id="datenschutz"
                                        required>
-                                <label class="form-check-label checkbox-label" for="datenschutz">
-                                    Datenschutz zustimmen
+                                <label class="form-check-label checkbox-label" for="datenschutz"> <a
+                                        href="{% static 'pdf/Datenschutzerklaerung.pdf' %}" target="_blank">
+                                    Datenschutz zustimmen </a>
                                 </label>
                                 <br>
                                 <button type="submit" class="btn btn-outline-danger mt-2">Bestätigen</button>
