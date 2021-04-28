@@ -1,15 +1,19 @@
-{% extends 'hftchekin/base_professor.html' %}
+{% extends 'hftchekin/base_student.html' %}
 {% load static %}
 
 {% block title %}
-    <title>HFT Prüfungstabelle</title>
+    <title>HFT Übersicht</title>
 {% endblock title %}
 
 {% block homenav %}
-    <a href="{% url 'professorhome' %}" class="btn btn-outline-danger"><span
+    <a href="{% url 'checkin' %}" class="btn btn-outline-danger"><span
             class="fas fa-home"></span>
         Home</a>
 {% endblock homenav %}
+
+{% block logoutnav %}
+    <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+{% endblock logoutnav %}
 
 {% block body %}
     <main>
@@ -18,40 +22,30 @@
                 <div class="row">
                     <div class="col my-5">
                         <form action="" method="POST">
-                            <h1>Prüfungstabelle</h1>
+                            <h1>Übersicht</h1>
                             <br>
                             <div class="card shadow-sm">
-                                <!-- Prüfungstabelle -->
+                                <!-- Übersicht der geschriebenen Prüfung -->
                                 <div class="table-responsive">
                                     <table class="table table-hover table-striped">
                                         <thead>
                                         <tr>
-                                            <th scope="col">ID</th>
                                             <th scope="col">Modul</th>
-                                            <th scope="col">Semester</th>
-                                            <th scope="col">Prüfer/in</th>
                                             <th scope="col">Dauer</th>
                                             <th scope="col">Datum</th>
+                                            <th scope="col">Geschriebene Zeit</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>83123</td>
                                             <td>Pervasive Computing</td>
-                                            <td>SoSe21</td>
-                                            <td>Herr Knauth</td>
                                             <td>90min</td>
                                             <td>28.06.2021</td>
+                                            <td>86min</td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            <div class="checkbox-div my-3">
-                                <form>
-                                    <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                           onclick="history.back()">
-                                </form>
                             </div>
                         </form>
                     </div>
