@@ -30,7 +30,7 @@
                                                    required>
                                             <br>
                                             <label for="password" class="form-label">Passwort</label>
-                                            <input type="password" class="form-control" id="password"
+                                            <input type="password" class="form-control" id="floatingPassword"
                                                    required>
                                             <div class="form-floating">
                                             <span class="fas fa-eye " id="eyeKonto"
@@ -82,17 +82,4 @@
             </section>
         </section>
     </main>
-
-    <!-- Passwort-Funktion -->
-    <script>
-        function showpw() {
-            let x = document.getElementById("password");
-            let icon = document.getElementById('#eye');
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
 {% endblock body %}

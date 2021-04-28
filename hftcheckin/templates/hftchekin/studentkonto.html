@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="password" class="form-label">Passwort</label>
-                                            <input type="text" class="form-control" id="floatingPassword"
+                                            <input type="password" class="form-control" id="floatingPassword"
                                                    disabled>
                                             <div class="form-floating">
                                             <span class="fas fa-eye " id="eyeKonto"
@@ -72,17 +72,4 @@
             </div>
         </section>
     </main>
-
-    <!-- Passwort-Funktion -->
-    <script>
-        function showpw() {
-            let x = document.getElementById("password");
-            let icon = document.getElementById('#eye');
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-    </script>
 {% endblock body %}
