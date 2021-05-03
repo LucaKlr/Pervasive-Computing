@@ -3,7 +3,8 @@ from django.urls import path
 from hftcheckin import views
 
 urlpatterns = [
-    path('login/', views.login, name='login'),
+    path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutPage, name='logout'),
     path('registrierung/', views.registrierung, name='registrierung'),
     path('checkin/', views.checkin, name='checkin'),
     path('formular/', views.formular, name='formular'),

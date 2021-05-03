@@ -12,7 +12,7 @@
 {% endblock kontonav %}
 
 {% block logoutnav %}
-    <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
 {% endblock logoutnav %}
 
 {% block body %}
