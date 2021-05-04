@@ -76,3 +76,7 @@ def studententabelle(request):
 
 def geschriebenuebersicht(request):
     return render(request, 'hftchekin/geschriebenuebersicht.html')
+
+
+def registrierung2(request):
+    return render(request, 'hftchekin/registrierung2.html')
