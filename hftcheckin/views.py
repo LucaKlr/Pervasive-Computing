@@ -48,8 +48,8 @@ def professorkonto(request):
     return render(request, 'hftchekin/professorkonto.html')
 
 
-def pruefungsregistrierung(request):
-    return render(request, 'hftchekin/pruefungsregistrierung.html')
+#def pruefungsregistrierung(request):
+ #   return render(request, 'hftchekin/pruefungsregistrierung.html')
 
 
 def professorhome(request):
