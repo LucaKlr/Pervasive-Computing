@@ -22,7 +22,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Prüfungsanmeldung</h5>
                                     <hr>
-                                    <form action="">
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{ form | crispy }}
                                         <div class="card-body text-center ">
                                             <label for="id" class="form-label">ID</label>
                                             <input type="text" class="form-control" id="id"

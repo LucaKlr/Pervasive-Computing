@@ -9,13 +9,3 @@ class Pruefung (ModelForm):
 
         model = Pruefung
         fields = '__all__'
-        labels = {
-            'pid': 'Prüfungs ID',
-            'passwort': 'Passwort',
-            'modul': 'Modul',
-            'semester': 'Semester',
-            'pruefer': 'Prüfer',
-            'raumnummer': 'Raumnummer',
-            'dauer': 'Dauer in Minuten'
-
-        }

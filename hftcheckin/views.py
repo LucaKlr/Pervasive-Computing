@@ -8,9 +8,9 @@ from .models import *
 from .forms import *
 
 def Pruefung_anlegen(request):
-
+    form = Pruefung_anlegen()
     if request.method == "POST":
-        form = Pruefung(request.POST)
+        form = Pruefung_anlegen(request.POST)
         if form.is_valid():
             form.save()
             context = {'form': form}
