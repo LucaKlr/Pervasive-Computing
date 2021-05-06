@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from hftcheckin.models import *
@@ -10,14 +11,13 @@ from .forms import *
 
 def pruefungsregistrierung(request):
     form = Pruefung()
-    if request.method == "POST":
+    if request.method == 'POST':
         form = Pruefung(request.POST)
         if form.is_valid():
             form.save()
-            context = {'form': form}
-
-            
-            return render(request, "hftcheckin\pruefungsregistrierung.html", context)
+        return redirect('pruefungsuebersicht')
+        context = {'form': form}
+        return render(request, "hftcheckin\pruefungsregistrierung.html", context)
 
 
 def login(request):
