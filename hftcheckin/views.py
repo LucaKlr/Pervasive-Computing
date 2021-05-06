@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 # Create your views here.
 from hftcheckin.models import *
@@ -7,10 +8,10 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 
-def Pruefung_anlegen(request):
-    form = Pruefung_anlegen()
+def pruefungsregistrierung(request):
+    form = Pruefung(request)
     if request.method == "POST":
-        form = Pruefung_anlegen(request.POST)
+        form = Pruefung(request.POST)
         if form.is_valid():
             form.save()
             context = {'form': form}
