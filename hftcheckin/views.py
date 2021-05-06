@@ -1,7 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from hftcheckin.models import *
+from hftcheckin.forms import *
+from django.contrib import messages
+from .models import *
+from .forms import *
+
+def Pruefung_anlegen(request):
+
+    if request.method == "POST":
+        form = Pruefung(request.POST)
+        if form.is_valid():
+            form.save()
+            context = {'form': form}
+            return render(request, "hftcheckin\pruefungsregistrierung.html", context)
 
 
 def login(request):
