@@ -9,12 +9,14 @@ from .models import *
 from .forms import *
 
 def pruefungsregistrierung(request):
-    form = Pruefung(request)
+    form = Pruefung()
     if request.method == "POST":
         form = Pruefung(request.POST)
         if form.is_valid():
             form.save()
             context = {'form': form}
+
+            
             return render(request, "hftcheckin\pruefungsregistrierung.html", context)
 
 
