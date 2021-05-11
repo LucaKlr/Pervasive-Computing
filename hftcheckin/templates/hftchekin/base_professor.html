@@ -39,9 +39,8 @@
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             {% block homenav %}
                             {% endblock homenav %}
-                            <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span
-                                    class="fas fa-user-circle"></span>
-                                Konto</a>
+                            {% block kontonav %}
+                            {% endblock kontonav %}
                             <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
                         </div>
                     </div>

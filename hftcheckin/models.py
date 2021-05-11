@@ -12,7 +12,7 @@ from django.db import models
 class Student(models.Model):
     vorname = models.CharField(max_length=45, null=True)
     nachname = models.CharField(max_length=45, null=True)
-    mitarbeiternummer = models.CharField(max_length=45, null=True)
+    matrikelnummer = models.CharField(max_length=45, null=True)
     studiengang = models.CharField(max_length=45, null=True)
     email = models.CharField(max_length=45, null=True)
 

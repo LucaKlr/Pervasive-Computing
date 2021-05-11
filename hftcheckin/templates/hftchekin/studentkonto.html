@@ -5,11 +5,15 @@
     <title>HFT Konto</title>
 {% endblock title %}
 
-{% block kontonav %}
-    <a href="{% url 'studentkonto' %}" class="btn btn-outline-danger"><span
-            class="fas fa-user-circle"></span>
-        Konto</a>
-{% endblock kontonav %}
+{% block homenav %}
+    <a href="{% url 'checkin' %}" class="btn btn-outline-danger"><span
+            class="fas fa-home"></span>
+        Home</a>
+{% endblock homenav %}
+
+{% block logoutnav %}
+    <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+{% endblock logoutnav %}
 
 {% block body %}
     <main>
@@ -48,6 +52,7 @@
                                             <input type="text" class="form-control" id="email"
                                                    disabled>
                                         </div>
+                                        <!--
                                         <div class="card-body text-center">
                                             <label for="password" class="form-label">Passwort</label>
                                             <input type="text" class="form-control" id="floatingPassword"
@@ -57,6 +62,7 @@
                                                   onclick="showpw()"></span>
                                             </div>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>

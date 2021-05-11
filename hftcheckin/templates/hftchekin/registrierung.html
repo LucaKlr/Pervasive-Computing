@@ -1,5 +1,6 @@
 {% extends 'hftchekin/base_login.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     <title>HFT Registrierung</title>
@@ -14,10 +15,17 @@
                         <div class="col mt-5">
                             <div class="card shadow-lg center" style="max-width: 35rem">
                                 <div class="card-body">
-                                    <h5 class="card-title">Studentenregistrierung</h5>
+                                    <h5 class="card-title">Personenbezogene Daten</h5>
                                     <hr>
-                                    <form action="">
-                                        <div class="card-body text-center ">
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{ form | crispy }}
+                                        <div class="d-grid gap-3 mt-4">
+                                            <button type="submit" class="btn btn-danger">Registrierung fortsetzen
+                                            </button>
+                                        </div>
+
+                                        <!-- <div class="card-body text-center ">
                                             <label for="vorname" class="form-label">Vorname</label>
                                             <input type="text" class="form-control" id="vorname" placeholder="Max"
                                                    required>
@@ -53,7 +61,7 @@
                                                 <button type="submit" class="btn btn-danger">Registrierung abschließen
                                                 </button>
                                             </div>
-                                        </div>
+                                        </div>       -->
                                     </form>
                                 </div>
                             </div>

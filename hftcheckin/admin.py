@@ -6,3 +6,4 @@ from hftcheckin.models import *
 admin.site.register(Student)
 admin.site.register(Professor)
 admin.site.register(Pruefung)
+
