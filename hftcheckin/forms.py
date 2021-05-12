@@ -3,9 +3,11 @@ from django import forms
 from .models import *
 
 
-class Pruefung (ModelForm):
+class Pruefung(ModelForm):
 
     class Meta:
 
         model = Pruefung
         fields = '__all__'
+
+    

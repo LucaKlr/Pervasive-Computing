@@ -7,7 +7,7 @@ from hftcheckin.models import *
 from hftcheckin.forms import *
 from django.contrib import messages
 from .models import *
-from .forms import *
+from .forms import Pruefung
 
 def pruefungsregistrierung(request):
     form = Pruefung()
@@ -15,9 +15,9 @@ def pruefungsregistrierung(request):
         form = Pruefung(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('pruefungsuebersicht')
-        context = {'form': form}
-        return render(request, "hftcheckin\pruefungsregistrierung.html", context)
+            return redirect('pruefungstabelle')
+    context = {'form': form}
+    return render(request, "hftchekin\pruefungsregistrierung.html", context)
 
 
 def login(request):
