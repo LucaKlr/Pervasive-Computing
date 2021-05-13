@@ -1,4 +1,9 @@
 from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+
+# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -6,9 +11,7 @@ from hftcheckin.models import *
 from .forms import CreateUserForm
 from .decorators import allowed_users
 
-from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
 def loginPage(request):
         if request.method == 'POST':
@@ -33,7 +36,11 @@ def registrierung(request):
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+
+                group = Group.objects.get(name='Studenten')
+                user.groups.add(group)
+
                 return redirect('login')
         context = {'form': form}
         return render(request, 'hftchekin/registrierung.html', context)
