@@ -88,9 +88,11 @@ def professorkonto(request):
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
     form = Pruefung()
-    if form.is_valid():
-        form.save()
-        return redirect('pruefungstabelle')
+    if request.method == 'POST':
+        form = Pruefung(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pruefungstabelle')
     context = {'form': form}
     return render(request, 'hftchekin/pruefungsregistrierung.html', context)
 

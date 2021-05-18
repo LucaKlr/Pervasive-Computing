@@ -39,6 +39,7 @@ class Pruefung(models.Model):
     pruefer = models.CharField(max_length=45, null=True)
     raumnummer = models.CharField(max_length=45, null=True)
     dauer = models.FloatField(max_length=45, null=True)
+    datum = models.CharField(max_length=45, null=True)
 
     def __str__(self):
         return f'{self.modul} {self.semester} {self.pruefer}'
