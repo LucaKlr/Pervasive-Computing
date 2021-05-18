@@ -12,17 +12,16 @@ from .forms import CreateUserForm
 from .decorators import allowed_users
 
 
-
 def loginPage(request):
-        if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('checkin')
-        context = {}
-        return render(request, 'hftchekin/login.html', context)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('checkin')
+    context = {}
+    return render(request, 'hftchekin/login.html', context)
 
 
 def logoutPage(request):
@@ -32,74 +31,79 @@ def logoutPage(request):
 
 
 def registrierung(request):
-        form = CreateUserForm()
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                user = form.save()
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
 
-                group = Group.objects.get(name='Studenten')
-                user.groups.add(group)
+            group = Group.objects.get(name='Studenten')
+            user.groups.add(group)
 
-                return redirect('login')
-        context = {'form': form}
-        return render(request, 'hftchekin/registrierung.html', context)
+            return redirect('login')
+    context = {'form': form}
+    return render(request, 'hftchekin/registrierung.html', context)
+
 
 # def registrierung2(request):
-   # return redirect('login')
-   # return render(request, 'hftchekin/registrierung2.html')
+# return redirect('login')
+# return render(request, 'hftchekin/registrierung2.html')
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def checkin(request):
     return render(request, 'hftchekin/checkin.html')
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def formular(request):
     return render(request, 'hftchekin/formular.html')
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def timer(request):
     return render(request, 'hftchekin/timer.html')
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def studentkonto(request):
     return render(request, 'hftchekin/studentkonto.html')
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def professorkonto(request):
     return render(request, 'hftchekin/professorkonto.html')
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
     return render(request, 'hftchekin/pruefungsregistrierung.html')
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def professorhome(request):
     return render(request, 'hftchekin/professorhome.html')
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungstabelle(request):
     return render(request, 'hftchekin/pruefungstabelle.html')
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def studententabelle(request):
     return render(request, 'hftchekin/studententabelle.html')
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def geschriebenuebersicht(request):
     return render(request, 'hftchekin/geschriebenuebersicht.html')
-
-
-
-
-
