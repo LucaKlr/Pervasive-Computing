@@ -2,13 +2,18 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from hftcheckin.models import *
+from hftcheckin.forms import * 
 from .forms import CreateUserForm
+from .forms import Pruefung
+from .models import Pruefung as Pruefungen
 from .decorators import allowed_users
 
 
@@ -82,7 +87,14 @@ def professorkonto(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
-    return render(request, 'hftchekin/pruefungsregistrierung.html')
+    form = Pruefung()
+    if request.method == 'POST':
+        form = Pruefung(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pruefungstabelle')
+    context = {'form': form}
+    return render(request, 'hftchekin/pruefungsregistrierung.html', context)
 
 
 @login_required(login_url='login')
@@ -94,7 +106,8 @@ def professorhome(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungstabelle(request):
-    return render(request, 'hftchekin/pruefungstabelle.html')
+    pruefungen = Pruefungen.objects.all()
+    return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen': pruefungen})
 
 
 @login_required(login_url='login')
