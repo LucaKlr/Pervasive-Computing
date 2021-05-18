@@ -1,4 +1,5 @@
 {% extends 'hftchekin/base_professor.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 
 {% block title %}
@@ -17,7 +18,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col my-5">
-                        <form action="" method="POST">
+                        <form method="GET">
+                            {% csrf_token %}
+                            {{ form | crispy }}
                             <h1>Prüfungstabelle</h1>
                             <br>
                             <div class="card shadow-sm">
@@ -35,14 +38,24 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {% for i in pruefungen %}    
                                         <tr>
-                                            <td>83123</td>
+                                            <td>{{ i.pid }}</td>
+                                            <td>{{ i.passwort }}</td>
+                                            <td>{{ i.modul }}</td>
+                                            <td>{{ i.semester }}</td>
+                                            <td>{{ i.pruefer }}</td>
+                                            <td>{{ i.raumnummer }}</td>
+                                            <td>{{ i.dauer }}</td>
+                                            
+                                            <!--<td>83123</td>
                                             <td>Pervasive Computing</td>
                                             <td>SoSe21</td>
                                             <td>Herr Knauth</td>
                                             <td>90min</td>
-                                            <td>28.06.2021</td>
+                                            <td>28.06.2021</td>-->
                                         </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

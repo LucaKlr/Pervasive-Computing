@@ -7,6 +7,7 @@ from hftcheckin.models import *
 from hftcheckin.forms import *
 from django.contrib import messages
 from .models import *
+from .models import Pruefung as Pruefungen
 from .forms import Pruefung
 
 def pruefungsregistrierung(request):
@@ -60,7 +61,9 @@ def professorhome(request):
 
 
 def pruefungstabelle(request):
-    return render(request, 'hftchekin/pruefungstabelle.html')
+    pruefungen = Pruefungen.objects.all()
+   # context = {'pruefungen' : pruefungen}
+    return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen' :pruefungen})
 
 
 def studententabelle(request):
