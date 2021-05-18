@@ -1,11 +1,16 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 from hftcheckin.models import *
+from hftcheckin.forms import *
+from .models import Pruefung as Pruefungen
+from .forms import Pruefung
 from .forms import CreateUserForm
 
 
@@ -59,7 +64,14 @@ def professorkonto(request):
 
 
 def pruefungsregistrierung(request):
-    return render(request, 'hftchekin/pruefungsregistrierung.html')
+    form = Pruefung()
+    if request.method == 'POST':
+        form = Pruefung(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pruefungstabelle')
+    context = {'form': form}
+    return render(request, 'hftchekin/pruefungsregistrierung.html', context)
 
 
 def professorhome(request):
@@ -67,7 +79,8 @@ def professorhome(request):
 
 
 def pruefungstabelle(request):
-    return render(request, 'hftchekin/pruefungstabelle.html')
+    pruefungen = Pruefungen.objects.all()
+    return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen': pruefungen})
 
 
 def studententabelle(request):

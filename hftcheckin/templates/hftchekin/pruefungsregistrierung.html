@@ -1,15 +1,11 @@
 {% extends 'hftchekin/base_professor.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}
     <title>HFT Prüfungsregistrierung</title>
 {% endblock title %}
-
-{% block kontonav %}
-    <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span
-            class="fas fa-user-circle"></span>
-        Konto</a>
-{% endblock kontonav %}
 
 {% block homenav %}
     <a href="{% url 'professorhome' %}" class="btn btn-outline-danger"><span
@@ -28,9 +24,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Prüfungsanmeldung</h5>
                                     <hr>
-                                    <form action="">
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{ form | crispy }}
                                         <div class="card-body text-center ">
-                                            <label for="id" class="form-label">ID</label>
+                                           <!-- <label for="id" class="form-label">ID</label>
                                             <input type="text" class="form-control" id="id"
                                                    placeholder="z.B. SoSe21PerComp"
                                                    required>
@@ -66,7 +64,7 @@
                                             <label for="dauer" class="form-label">Dauer</label>
                                             <input type="text" class="form-control" id="dauer"
                                                    placeholder="z.B. 2 Stunden"
-                                                   required>
+                                                   required>-->
                                             <div class="d-grid gap-3 mt-4">
                                                 <button type="submit" class="btn btn-danger">Prüfungsanmeldung
                                                     abschließen
