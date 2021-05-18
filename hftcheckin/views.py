@@ -60,10 +60,12 @@ def formular(request):
     return render(request, 'hftchekin/formular.html')
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
 def timer(request):
     return render(request, 'hftchekin/timer.html')
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
 def studentkonto(request):
     return render(request, 'hftchekin/studentkonto.html')
 
