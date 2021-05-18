@@ -54,7 +54,8 @@ def registrierung(request):
 def checkin(request):
     return render(request, 'hftchekin/checkin.html')
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
 def formular(request):
     return render(request, 'hftchekin/formular.html')
 
