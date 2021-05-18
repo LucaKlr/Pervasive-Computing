@@ -2,67 +2,66 @@
 {% load static %}
 
 {% block title %}
-    <title>HFT Home</title>
+<title>HFT Home</title>
 {% endblock title %}
 
 {% block kontonav %}
-    <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span
-            class="fas fa-user-circle"></span>
-        Konto</a>
+    <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span> Konto</a>
 {% endblock kontonav %}
 
 {% block body %}
-    <main>
-        <section>
-            <div>
-            </div>
-            <div class="container mt-5">
-                <div class="row mt-5">
-                    <div class="col mt-5">
-                        <div class="card shadow-lg center" style="max-width: 35rem">
-                            <div class="card-body">
-                                <h5 class="card-title">Funktionen</h5>
-                                <hr>
-                                <form action="">
-                                    <div class="d-grid gap-2 mt-3">
-                                        <a href="{% url 'pruefungsregistrierung' %}" type="submit"
-                                           class="btn btn-danger">Prüfung
-                                            anlegen</a>
-                                    </div>
-                                    <div class="d-grid gap-2 mt-3">
-                                        <a href="{% url 'pruefungstabelle' %}" type="submit" class="btn btn-danger">Prüfungstabelle
-                                            einsehen</a>
-                                    </div>
-                                    <div class="d-grid gap-2 mt-3">
-                                        <a href="{% url 'studententabelle' %}" type="submit" class="btn btn-danger">Aktuelle
-                                            Prüfungsteilnehmer
-                                            einsehen
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+<main>
+    <section>
+        <div>
+        </div>
+        <div class="container mt-5">
+            <div class="row mt-5">
+                <div class="col mt-5">
+                    <div class="card shadow-lg center" style="max-width: 35rem">
+                        <div class="card-body">
+                            <h5 class="card-title">Funktionen</h5>
+                            <hr>
+                            <form action="">
+                                {% csrf_token %}
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="{% url 'pruefungsregistrierung' %}" type="submit"
+                                       class="btn btn-danger">Prüfung
+                                        anlegen</a>
+                                </div>
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="{% url 'pruefungstabelle' %}" type="submit" class="btn btn-danger">Prüfungstabelle
+                                        einsehen</a>
+                                </div>
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="{% url 'studententabelle' %}" type="submit" class="btn btn-danger">Aktuelle
+                                        Prüfungsteilnehmer
+                                        einsehen
+                                    </a>
+                                </div>
+                            </form>
                         </div>
-                        <div class="card shadow-lg center mt-5" style="max-width: 35rem">
-                            <div class="card-body">
-                                <h5 class="card-title">Quicklinks</h5>
-                                <hr>
-                                <div class="d-grid gap-2 mt-3">
-                                    <a href="https://mail.hft-stuttgart.de/" class="link-danger"
-                                       target="_blank">Webmail</a>
-                                </div>
-                                <div class="d-grid gap-2 mt-3">
-                                    <a href="https://lsf.hft-stuttgart.de/" class="link-danger"
-                                       target="_blank">LSF-Portal</a>
-                                </div>
-                                <div class="d-grid gap-2 mt-3">
-                                    <a href="https://moodle.hft-stuttgart.de/" class="link-danger"
-                                       target="_blank">Moodle</a>
-                                </div>
+                    </div>
+                    <div class="card shadow-lg center mt-5" style="max-width: 35rem">
+                        <div class="card-body">
+                            <h5 class="card-title">Quicklinks</h5>
+                            <hr>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="https://mail.hft-stuttgart.de/" class="link-danger"
+                                   target="_blank">Webmail</a>
+                            </div>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="https://lsf.hft-stuttgart.de/" class="link-danger"
+                                   target="_blank">LSF-Portal</a>
+                            </div>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="https://moodle.hft-stuttgart.de/" class="link-danger"
+                                   target="_blank">Moodle</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 {% endblock body %}

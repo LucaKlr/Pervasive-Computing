@@ -17,6 +17,11 @@
         Home</a>
 {% endblock homenav %}
 
+{% block kontonav %}
+    <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
+    Konto</a>
+{% endblock kontonav %}
+
 {% block body %}
     <main>
         <section>
