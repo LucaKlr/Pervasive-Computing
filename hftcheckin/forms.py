@@ -9,5 +9,9 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username','first_name', 'last_name',  'email', 'password1', 'password2']
 
+class Pruefung(ModelForm):
+    class Meta:
+        model = Pruefung
+        fields = '__all__'
 
 
