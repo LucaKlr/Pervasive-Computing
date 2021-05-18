@@ -4,7 +4,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
+ 
     dependencies = [
         ('hftcheckin', '0007_auto_20210518_1357'),
     ]
