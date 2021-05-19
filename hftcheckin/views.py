@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from hftcheckin.models import *
-from hftcheckin.forms import * 
+from hftcheckin.forms import *
 from .forms import CreateUserForm
 from .forms import Pruefung
 from .models import Pruefung as Pruefungen
@@ -41,18 +41,34 @@ def registrierung(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-
             group = Group.objects.get(name='Studenten')
             user.groups.add(group)
-
-            return redirect('login')
+            Student.objects.create(
+                user=user,
+                vorname=user.first_name,
+                nachname=user.last_name,
+                email=user.email
+            )
+            login(request, user)
+            return redirect('registrierung2')
     context = {'form': form}
     return render(request, 'hftchekin/registrierung.html', context)
 
 
-# def registrierung2(request):
-# return redirect('login')
-# return render(request, 'hftchekin/registrierung2.html')
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
+def registrierung2(request):
+    student = Student.objects.get(user=request.user)
+    form = StudentenDaten(instance=student)
+    if request.method == 'POST':
+        form = StudentenDaten(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('checkin')
+
+    context = {'form': form}
+    return render(request, 'hftchekin/registrierung2.html', context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
@@ -66,8 +82,6 @@ def formular(request):
     return render(request, 'hftchekin/formular.html')
 
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['Studenten'])
 def timer(request):
     return render(request, 'hftchekin/timer.html')
 

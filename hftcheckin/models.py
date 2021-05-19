@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -10,6 +11,7 @@ from django.db import models
 
 
 class Student(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     vorname = models.CharField(max_length=45, null=True)
     nachname = models.CharField(max_length=45, null=True)
     matrikelnummer = models.CharField(max_length=45, null=True)

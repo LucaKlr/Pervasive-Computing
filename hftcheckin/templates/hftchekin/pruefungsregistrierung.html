@@ -3,96 +3,100 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>HFT Prüfungsregistrierung</title>
+<title>HFT Prüfungsregistrierung</title>
 {% endblock title %}
 
 {% block homenav %}
-    <a href="{% url 'professorhome' %}" class="btn btn-outline-danger"><span
-            class="fas fa-home"></span>
-        Home</a>
+<a href="{% url 'professorhome' %}" class="btn btn-outline-danger"><span
+        class="fas fa-home"></span>
+    Home</a>
 {% endblock homenav %}
 
 {% block kontonav %}
-    <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
+<a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
     Konto</a>
 {% endblock kontonav %}
 
 {% block body %}
-    <main>
+<main>
+    <section>
         <section>
-            <section>
-                <div class="container mt-5">
-                    <div class="row mt-5">
-                        <div class="col mt-5">
-                            <div class="card shadow-lg center" style="max-width: 35rem">
-                                <div class="card-body">
-                                    <h5 class="card-title">Prüfungsanmeldung</h5>
-                                    <hr>
-                                    <form method="POST" action="">
-                                        {% csrf_token %}
-                                        {{ form | crispy }}
-                                       <div class="card-body text-center ">
-                                           <!--  <label for="id" class="form-label">ID</label>
-                                            <input type="text" class="form-control" id="id"
-                                                   placeholder="z.B. SoSe21PerComp"
-                                                   required>
-                                            <br>
-                                            <label for="password" class="form-label">Passwort</label>
-                                            <input type="password" class="form-control" id="password"
-                                                   required>
-                                            <div class="form-floating">
-                                            <span class="fas fa-eye " id="eyeKonto"
-                                                  onclick="showpw()"></span>
-                                            </div>
-                                            <br>
-                                            <label for="modul" class="form-label">Modul</label>
-                                            <input type="text" class="form-control" id="modul"
-                                                   placeholder="z.B. Pervasiv Computing"
-                                                   required>
-                                            <br>
-                                            <label for="semester" class="form-label">Semester</label>
-                                            <input type="text" class="form-control" id="semester"
-                                                   placeholder="z.B. Sommersemester 2021"
-                                                   required>
-                                            <br>
-                                            <label for="pruefer" class="form-label">Prüfer/in</label>
-                                            <input type="text" class="form-control" id="pruefer"
-                                                   placeholder="z.B. Herr Knauth"
-                                                   required>
-                                            <br>
-                                            <label for="raumnummer" class="form-label">Raumnummer</label>
-                                            <input type="text" class="form-control" id="raumnummer"
-                                                   placeholder="z.B. 2/231"
-                                                   required>
-                                            <br>
-                                            <label for="dauer" class="form-label">Dauer</label>
-                                            <input type="text" class="form-control" id="dauer"
-                                                   placeholder="z.B. 2 Stunden"
-                                                   required> -->
-                                            <div class="d-grid gap-3 mt-4">
-                                                <button type="submit" class="btn btn-danger">Prüfungsanmeldung
-                                                    abschließen
-                                                </button>
-                                            </div>
+            <div class="container mt-5">
+                <div class="row mt-5">
+                    <div class="col mt-5">
+                        <div class="card shadow-lg center" style="max-width: 35rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Prüfungsanmeldung</h5>
+                                <hr>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    {% for i in form %}
+                                    <div class="mb-3">
+                                        {{ i | as_crispy_field }}
+                                    </div>
+                                    {% endfor %}
+                                    <div class="card-body text-center ">
+                                        <!--  <label for="id" class="form-label">ID</label>
+                                         <input type="text" class="form-control" id="id"
+                                                placeholder="z.B. SoSe21PerComp"
+                                                required>
+                                         <br>
+                                         <label for="password" class="form-label">Passwort</label>
+                                         <input type="password" class="form-control" id="password"
+                                                required>
+                                         <div class="form-floating">
+                                         <span class="fas fa-eye " id="eyeKonto"
+                                               onclick="showpw()"></span>
+                                         </div>
+                                         <br>
+                                         <label for="modul" class="form-label">Modul</label>
+                                         <input type="text" class="form-control" id="modul"
+                                                placeholder="z.B. Pervasiv Computing"
+                                                required>
+                                         <br>
+                                         <label for="semester" class="form-label">Semester</label>
+                                         <input type="text" class="form-control" id="semester"
+                                                placeholder="z.B. Sommersemester 2021"
+                                                required>
+                                         <br>
+                                         <label for="pruefer" class="form-label">Prüfer/in</label>
+                                         <input type="text" class="form-control" id="pruefer"
+                                                placeholder="z.B. Herr Knauth"
+                                                required>
+                                         <br>
+                                         <label for="raumnummer" class="form-label">Raumnummer</label>
+                                         <input type="text" class="form-control" id="raumnummer"
+                                                placeholder="z.B. 2/231"
+                                                required>
+                                         <br>
+                                         <label for="dauer" class="form-label">Dauer</label>
+                                         <input type="text" class="form-control" id="dauer"
+                                                placeholder="z.B. 2 Stunden"
+                                                required> -->
+                                        <div class="d-grid gap-3 mt-4">
+                                            <button type="submit" class="btn btn-danger">Prüfungsanmeldung
+                                                abschließen
+                                            </button>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="checkbox-div col-md-5 my-3">
-                                <form>
-                                    <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                           onclick="history.back()">
+                                    </div>
                                 </form>
                             </div>
                         </div>
+                        <div class="checkbox-div col-md-5 my-3">
+                            <form>
+                                <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
+                                       onclick="history.back()">
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </section>
-    </main>
+    </section>
+</main>
 
-    <!-- Passwort-Funktion -->
-    <script>
+<!-- Passwort-Funktion -->
+<script>
         function showpw() {
             let x = document.getElementById("password");
             let icon = document.getElementById('#eye');
@@ -102,5 +106,7 @@
                 x.type = "password";
             }
         }
-    </script>
+
+
+</script>
 {% endblock body %}

@@ -3,51 +3,59 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>HFT Registrierung</title>
+<title>HFT Registrierung</title>
 {% endblock title %}
 
 {% block body %}
-    <main>
+<main>
+    <section>
         <section>
-            <section>
-                <div class="container mt-5">
-                    <div class="row mt-5">
-                        <div class="col mt-5">
-                            <div class="card shadow-lg center" style="max-width: 35rem">
-                                <div class="card-body">
-                                    <h5 class="card-title">Studiumsbezogene Daten</h5>
-                                    <hr>
-                                    <form method="POST" action="">
-                                        {% csrf_token %}
-                                        {{ form | crispy }}
-                                        <label for="matrikelnummer" class="form-label">Matrikelnummer</label>
-                                        <input type="text" class="form-control" id="matrikelnummer"
-                                               placeholder="z.B. 198 926"
-                                               required>
-                                        <br>
-                                        <label for="studiengang" class="form-label">Studiengang</label>
-                                        <input type="text" class="form-control" id="studiengang"
-                                               placeholder="z.B. Wirtschaftsinformatik"
-                                               required>
-                                        <div class="d-grid gap-3 mt-4">
-                                            <button type="submit" class="btn btn-danger">Registrierung abschließen
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+            <div class="container mt-5">
+                <div class="row mt-5">
+                    <div class="col mt-5">
+                        <div class="card shadow-lg center" style="max-width: 35rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Studiumsbezogene Daten</h5>
+                                <hr>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        {{ form.matrikelnummer | as_crispy_field }}
+                                    </div>
+                                     <div class="mb-3">
+                                        {{ form.studiengang | as_crispy_field }}
+                                    </div>
+                                    <!--
+                                     <label for="matrikelnummer" class="form-label">Matrikelnummer</label>
+                                    <input type="text" class="form-control" id="matrikelnummer"
+                                           placeholder="z.B. 198 926"
+                                           required>
+                                    <br>
+                                    <label for="studiengang" class="form-label">Studiengang</label>
+                                    <input type="text" class="form-control" id="studiengang"
+                                           placeholder="z.B. Wirtschaftsinformatik"
+                                           required>
+                                     -->
+
+                                    <div class="d-grid gap-3 mt-4">
+                                        <button type="submit" class="btn btn-danger">Registrierung abschließen
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="checkbox-div col-md-5 my-3">
-                        <form>
-                            <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                   onclick="history.back()">
-                        </form>
-                    </div>
                 </div>
+                <div class="checkbox-div col-md-5 my-3">
+                    <form>
+                        <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
+                               onclick="history.back()">
+                    </form>
                 </div>
-                </div>
-            </section>
+            </div>
+            </div>
+            </div>
         </section>
-    </main>
+    </section>
+</main>
 {% endblock body %}

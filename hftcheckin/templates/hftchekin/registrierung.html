@@ -3,78 +3,82 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>HFT Registrierung</title>
+<title>HFT Registrierung</title>
 {% endblock title %}
 
 {% block body %}
-    <main>
+<main>
+    <section>
         <section>
-            <section>
-                <div class="container mt-5">
-                    <div class="row mt-5">
-                        <div class="col mt-5">
-                            <div class="card shadow-lg center" style="max-width: 35rem">
-                                <div class="card-body">
-                                    <h5 class="card-title">Personenbezogene Daten</h5>
-                                    <hr>
-                                    <form method="POST" action="">
-                                        {% csrf_token %}
-                                        {{ form | crispy }}
+            <div class="container mt-5">
+                <div class="row mt-5">
+                    <div class="col mt-5">
+                        <div class="card shadow-lg center" style="max-width: 35rem">
+                            <div class="card-body">
+                                <h5 class="card-title">Personenbezogene Daten</h5>
+                                <hr>
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    {% for i in form %}
+                                    <div class="mb-3">
+                                        {{ i | as_crispy_field }}
+                                    </div>
+                                    {% endfor %}
+                                    <div class="d-grid gap-3 mt-4">
+                                        <button type="submit" class="btn btn-danger">Registrierung fortsetzen
+                                        </button>
+                                    </div>
+
+                                    <!-- <div class="card-body text-center ">
+                                        <label for="vorname" class="form-label">Vorname</label>
+                                        <input type="text" class="form-control" id="vorname" placeholder="Max"
+                                               required>
+                                        <br>
+                                        <label for="nachname" class="form-label">Nachname</label>
+                                        <input type="text" class="form-control" id="nachname"
+                                               placeholder="z.B. Mustermann"
+                                               required>
+                                        <br>
+                                        <label for="matrikelnummer" class="form-label">Matrikelnummer</label>
+                                        <input type="text" class="form-control" id="matrikelnummer"
+                                               placeholder="z.B. 198 926"
+                                               required>
+                                        <br>
+                                        <label for="studiengang" class="form-label">Studiengang</label>
+                                        <input type="text" class="form-control" id="studiengang"
+                                               placeholder="z.B. Wirtschaftsinformatik"
+                                               required>
+                                        <br>
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="email"
+                                               placeholder="z.B. 81mamu1bwi@hft-sttutgart.de"
+                                               required>
+                                        <br>
+                                        <label for="password" class="form-label">Passwort</label>
+                                        <input type="password" class="form-control" id="floatingPassword"
+                                               required>
+                                        <div class="form-floating">
+                                        <span class="fas fa-eye " id="eyeKonto"
+                                              onclick="showpw()"></span>
+                                        </div>
                                         <div class="d-grid gap-3 mt-4">
-                                            <button type="submit" class="btn btn-danger">Registrierung fortsetzen
+                                            <button type="submit" class="btn btn-danger">Registrierung abschließen
                                             </button>
                                         </div>
-
-                                        <!-- <div class="card-body text-center ">
-                                            <label for="vorname" class="form-label">Vorname</label>
-                                            <input type="text" class="form-control" id="vorname" placeholder="Max"
-                                                   required>
-                                            <br>
-                                            <label for="nachname" class="form-label">Nachname</label>
-                                            <input type="text" class="form-control" id="nachname"
-                                                   placeholder="z.B. Mustermann"
-                                                   required>
-                                            <br>
-                                            <label for="matrikelnummer" class="form-label">Matrikelnummer</label>
-                                            <input type="text" class="form-control" id="matrikelnummer"
-                                                   placeholder="z.B. 198 926"
-                                                   required>
-                                            <br>
-                                            <label for="studiengang" class="form-label">Studiengang</label>
-                                            <input type="text" class="form-control" id="studiengang"
-                                                   placeholder="z.B. Wirtschaftsinformatik"
-                                                   required>
-                                            <br>
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email"
-                                                   placeholder="z.B. 81mamu1bwi@hft-sttutgart.de"
-                                                   required>
-                                            <br>
-                                            <label for="password" class="form-label">Passwort</label>
-                                            <input type="password" class="form-control" id="floatingPassword"
-                                                   required>
-                                            <div class="form-floating">
-                                            <span class="fas fa-eye " id="eyeKonto"
-                                                  onclick="showpw()"></span>
-                                            </div>
-                                            <div class="d-grid gap-3 mt-4">
-                                                <button type="submit" class="btn btn-danger">Registrierung abschließen
-                                                </button>
-                                            </div>
-                                        </div>       -->
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="checkbox-div col-md-5 my-3">
-                                <form>
-                                    <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                           onclick="history.back()">
+                                    </div>       -->
                                 </form>
                             </div>
                         </div>
+                        <div class="checkbox-div col-md-5 my-3">
+                            <form>
+                                <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
+                                       onclick="history.back()">
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </section>
-    </main>
+    </section>
+</main>
 {% endblock body %}

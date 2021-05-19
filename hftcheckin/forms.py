@@ -5,14 +5,20 @@ from django.contrib.auth.forms import User
 from django import forms
 from .models import *
 
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username','first_name', 'last_name',  'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+
+
+class StudentenDaten(ModelForm):
+    class Meta:
+        model = Student
+        fields = ['matrikelnummer', 'studiengang']
+
 
 class Pruefung(ModelForm):
     class Meta:
         model = Pruefung
         fields = '__all__'
-
-
