@@ -22,6 +22,14 @@
                 <div class="container mt-5">
                     <div class="row mt-5">
                         <div class="col mt-5">
+                            {% for msg in messages %}
+                                <div class="alert alert-primary alert-dismissible fade center show mb-3" role="alert"
+                                     style="max-width: 35rem">
+                                    {{ msg }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
                             <div class="card shadow-lg center" style="max-width: 35rem">
                                 <div class="card-body">
                                     <h5 class="card-title">Check-In</h5>

@@ -25,6 +25,8 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             return redirect('checkin')
+        else:
+            messages.info(request, 'Falscher Benutzername oder falsches Passwort.')
     context = {}
     return render(request, 'hftchekin/login.html', context)
 
@@ -40,17 +42,24 @@ def registrierung(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            group = Group.objects.get(name='Studenten')
-            user.groups.add(group)
-            Student.objects.create(
-                user=user,
-                vorname=user.first_name,
-                nachname=user.last_name,
-                email=user.email
-            )
-            login(request, user)
-            return redirect('registrierung2')
+            email = form.cleaned_data['email']
+            emails = ('@hft-stuttgart.de')
+            if email.endswith(emails):
+                user = form.save()
+                group = Group.objects.get(name='Studenten')
+                user.groups.add(group)
+                Student.objects.create(
+                    user=user,
+                    vorname=user.first_name,
+                    nachname=user.last_name,
+                    email=user.email
+                )
+                login(request, user)
+                messages.success(request, 'Sie haben sich erfolgreich registriert')
+                return redirect('registrierung2')
+            else:
+                messages.info(request, 'Unzulässige E-Mail Adresse')
+
     context = {'form': form}
     return render(request, 'hftchekin/registrierung.html', context)
 
@@ -64,7 +73,7 @@ def registrierung2(request):
         form = StudentenDaten(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            return redirect('checkin')
+            return redirect('login')
 
     context = {'form': form}
     return render(request, 'hftchekin/registrierung2.html', context)
@@ -89,13 +98,19 @@ def timer(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def studentkonto(request):
-    return render(request, 'hftchekin/studentkonto.html')
+    student = Student.objects.get(user=request.user)
+    context = {'student': student}
+
+    return render(request, 'hftchekin/studentkonto.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def professorkonto(request):
-    return render(request, 'hftchekin/professorkonto.html')
+    professor = Professor.objects.get(user=request.user)
+    context = {'professor': professor}
+
+    return render(request, 'hftchekin/professorkonto.html', context)
 
 
 @login_required(login_url='login')

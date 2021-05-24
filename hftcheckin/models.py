@@ -23,6 +23,7 @@ class Student(models.Model):
 
 
 class Professor(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     titel = models.CharField(max_length=45, null=True)
     vorname = models.CharField(max_length=45, null=True)
     nachname = models.CharField(max_length=45, null=True)
