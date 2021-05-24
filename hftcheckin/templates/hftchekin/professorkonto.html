@@ -25,27 +25,28 @@
                                     <div class="card shadow-lg center" style="max-width: 35rem">
                                         <div class="card-body text-center">
                                             <label for="titel" class="form-label">Titel</label>
-                                            <input type="text" class="form-control" id="titel"
+                                            <input type="text" class="form-control" id="titel" placeholder="{{ professor.titel}}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="vorname" class="form-label">Vorname</label>
                                             <input type="text" class="form-control" id="vorname"
+                                                   placeholder="{{ request.user.first_name }}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="nachname" class="form-label">Nachname</label>
-                                            <input type="text" class="form-control" id="nachname"
+                                            <input type="text" class="form-control" id="nachname" placeholder="{{ request.user.last_name }}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="mitarbeiternummer" class="form-label">Mitarbeiternummer</label>
-                                            <input type="text" class="form-control" id="mitarbeiternummer"
+                                            <input type="text" class="form-control" id="mitarbeiternummer" placeholder="{{ professor.mitarbeiternummer}}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email"
+                                            <input type="text" class="form-control" id="email" placeholder="{{ request.user.email }}"
                                                    disabled>
                                         </div>
                                         <!--

@@ -23,19 +23,28 @@
             <div class="container mt-5">
                 <div class="row mt-5">
                     <div class="col mt-5">
+                        {% for msg in messages %}
+                            <div class="alert alert-primary alert-dismissible fade center show mb-3" role="alert"
+                                 style="max-width: 35rem">
+                                {{ msg }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
                         <div class="card shadow-lg center" style="max-width: 35rem">
                             <div class="card-body">
                                 <h5 class="card-title">Login</h5>
                                 <hr>
-                                  <form method="POST" action="">
-                                      {% csrf_token %}
+                                <form method="POST" action="">
+                                    {% csrf_token %}
                                     <div class="form-floating mb-3">
-                                        <input type="text"  name="username" class="form-control" id="floatingInput"
+                                        <input type="text" name="username" class="form-control" id="floatingInput"
                                                placeholder="82drpa1bwi" required>
                                         <label for="floatingInput">Benutzername</label>
                                     </div>
                                     <div class="form-floating">
-                                        <input type="password" name="password" class="form-control input-field" id="floatingPassword"
+                                        <input type="password" name="password" class="form-control input-field"
+                                               id="floatingPassword"
                                                placeholder="Password" required>
                                         <!--  <span class="fas fa-eye" id="eyeLogin" onclick="showpw()"></span>     -->
                                         <label for="floatingPassword">Passwort</label>
