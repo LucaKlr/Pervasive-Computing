@@ -22,3 +22,8 @@ class Pruefung(ModelForm):
     class Meta:
         model = Pruefung
         fields = '__all__'
+
+class PruefCheck(ModelForm):
+    class Meta:
+        model = Pruefung
+        fields = ['pid', 'passwort']

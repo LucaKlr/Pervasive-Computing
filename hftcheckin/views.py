@@ -82,6 +82,19 @@ def registrierung2(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def checkin(request):
+     if request.method == 'POST':
+        pid = request.POST['pid']
+        passwort = request.POST['passwort']
+         = authenticate(request, pid=pid, passwort=passwort)
+        if pruefcheck is not None:
+            login(request, pruefcheck)
+            return redirect('timer')
+        else:
+            messages.info(request, 'Falscher Benutzername oder falsches Passwort.')
+    context = {}
+    return render(request, 'hftchekin/checkin.html', context)
+    
+    
     student = Student.objects.get(user=request.user)
 
     return render(request, 'hftchekin/checkin.html')
