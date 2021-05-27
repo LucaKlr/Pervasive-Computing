@@ -82,6 +82,8 @@ def registrierung2(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def checkin(request):
+    student = Student.objects.get(user=request.user)
+
     return render(request, 'hftchekin/checkin.html')
 
 
@@ -135,13 +137,17 @@ def professorhome(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungstabelle(request):
-    pruefungen = Pruefungen.objects.all()
+    professor = Professor.objects.get(user=request.user)
+    pruefungen = professor.pruefung_set.all()
     return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen': pruefungen})
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def studententabelle(request):
+    # professor = Professor.objects.get(user=request.user)
+    # pruefung = professor.pruefung_set.all()
+    # context = {'pruefung': pruefung}
     return render(request, 'hftchekin/studententabelle.html')
 
 

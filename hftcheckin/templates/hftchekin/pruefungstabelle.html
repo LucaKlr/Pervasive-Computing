@@ -14,7 +14,7 @@
 
 {% block kontonav %}
     <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
-    Konto</a>
+        Konto</a>
 {% endblock kontonav %}
 
 {% block body %}
@@ -44,22 +44,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for i in pruefungen %}    
-                                        <tr>
-                                            <td>{{ i.pid }}</td>
-                                            <td>{{ i.modul }}</td>
-                                            <td>{{ i.semester }}</td>
-                                            <td>{{ i.pruefer }}</td>
-                                            <td>{{ i.raumnummer }}</td>
-                                            <td>{{ i.dauer }}</td>
-                                            <td>{{ i.datum }}</td>
-                                           <!-- <td>83123</td>
-                                            <td>Pervasive Computing</td>
-                                            <td>SoSe21</td>
-                                            <td>Herr Knauth</td>
-                                            <td>90min</td>
-                                            <td>28.06.2021</td> -->
-                                        </tr>
+                                        {% for i in pruefungen %}
+                                            <tr data-href="{% url 'studententabelle' %}" class="table-row">
+                                                <td>
+                                                    {{ i.pid }}
+                                                    <a href="{% url 'studententabelle' %}" class="stretched-link"></a>
+                                                </td>
+                                                <td>{{ i.modul }}</td>
+                                                <td>{{ i.semester }}</td>
+                                                <td>{{ i.pruefer }}</td>
+                                                <td>{{ i.raumnummer }}</td>
+                                                <td>{{ i.dauer }}</td>
+                                                <td>{{ i.datum }}</td>
+                                            </tr>
                                         {% endfor %}
                                         </tbody>
                                     </table>

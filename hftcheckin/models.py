@@ -35,6 +35,8 @@ class Professor(models.Model):
 
 
 class Pruefung(models.Model):
+    student = models.ManyToManyField(Student)
+    professor = models.ForeignKey(Professor, null=True, on_delete=models.SET_NULL)
     pid = models.CharField(max_length=45, null=False)
     passwort = models.CharField(max_length=45, null=True)
     modul = models.CharField(max_length=45, null=True)
