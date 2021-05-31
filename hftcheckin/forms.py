@@ -26,7 +26,7 @@ class Pruefung(ModelForm):
         widgets = {'professor': forms.HiddenInput()}
 
 
-class PruefungCheckin(ModelForm):
-    class Meta:
-        model = Pruefung
-        fields = ['student']
+#class PruefungCheckin(ModelForm):
+ #   class Meta:
+  #      model = Pruefung
+   #     fields = ['student']
