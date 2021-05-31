@@ -24,12 +24,12 @@
                                         <div class="col-md-6">
                                             <label for="fach" class="form-label">Prüfungsfach</label>
                                             <input type="text" class="form-control" id="fach"
-                                                   placeholder="z.B. Mathematik" disabled>
+                                                   placeholder="{{ pruefungsdaten.modul }}" disabled>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="semester" class="form-label">Semester</label>
                                             <input type="text" class="form-control" id="semester"
-                                                   placeholder="SoSe 2021" disabled>
+                                                   placeholder="{{ pruefungsdaten.semester }}" disabled>
                                         </div>
                                     </div>
                                     <br>
@@ -37,7 +37,7 @@
                                         <div class="col-md-6">
                                             <label for="pruefer" class="form-label">Prüfer</label>
                                             <input type="text" class="form-control" id="pruefer"
-                                                   placeholder="z.B. Prof. Dr. Stefan Knauth" disabled>
+                                                   placeholder="{{ pruefungsdaten.pruefer }}" disabled>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="datum" class="form-label">Datum</label>
@@ -55,12 +55,12 @@
                                         <div class="col-md-6">
                                             <label for="vorname" class="form-label">Vorname</label>
                                             <input type="text" class="form-control" id="vorname"
-                                                   placeholder="z.B. Max" disabled>
+                                                   placeholder="{{ request.user.first_name }}" disabled>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nachname" class="form-label">Nachname</label>
                                             <input type="text" class="form-control" id="nachname"
-                                                   placeholder="z.B. Mustermann" disabled>
+                                                   placeholder="{{ request.user.last_name }}" disabled>
                                         </div>
                                     </div>
                                     <br>
@@ -68,17 +68,18 @@
                                         <div class="col-md-6">
                                             <label for="matrikelnummer" class="form-label">Matrikelnummer</label>
                                             <input type="text" class="form-control" id="matrikelnummer"
-                                                   placeholder="z.B. 123456" disabled>
+                                                   placeholder="{{ student.matrikelnummer}}" disabled>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="studiengang" class="form-label">Studiengang</label>
                                             <input type="text" class="form-control" id="studiengang"
-                                                   placeholder="z.B. Wirtschaftsinformatik" disabled>
+                                                   placeholder="{{ student.studiengang }}" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <br>
+
                             <!-- Beginn/Checkin -->
                             <div class="checkbox-div text-center">
                                 <input class="form-check-input checkbox-input" type="checkbox" id="agb" required>

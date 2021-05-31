@@ -23,52 +23,46 @@
             <div class="container">
                 <div class="row">
                     <div class="col my-5">
-                        <form method="GET">
-                            {% csrf_token %}
-                            {{ form | crispy }}
-                            <h1>Prüfungstabelle</h1>
-                            <br>
-                            <div class="card shadow-sm">
-                                <!-- Prüfungstabelle -->
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Modul</th>
-                                            <th scope="col">Semester</th>
-                                            <th scope="col">Prüfer/in</th>
-                                            <th scope="col">Raum</th>
-                                            <th scope="col">Dauer</th>
-                                            <th scope="col">Datum</th>
+                        <h1>Prüfungstabelle</h1>
+                        <br>
+                        <div class="card shadow-sm">
+                            <!-- Prüfungstabelle -->
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Modul</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Prüfer/in</th>
+                                        <th scope="col">Raum</th>
+                                        <th scope="col">Dauer</th>
+                                        <th scope="col">Datum</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in pruefungen %}
+                                        <tr data-href="{% url 'studententabelle' %}" class="table-row">
+                                            <td>
+                                                {{ i.pid }}
+                                                <a href="{% url 'studententabelle' %}" class="stretched-link"></a>
+                                            </td>
+                                            <td>{{ i.modul }}</td>
+                                            <td>{{ i.semester }}</td>
+                                            <td>{{ i.pruefer }}</td>
+                                            <td>{{ i.raumnummer }}</td>
+                                            <td>{{ i.dauer }}</td>
+                                            <td>{{ i.datum }}</td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in pruefungen %}
-                                            <tr data-href="{% url 'studententabelle' %}" class="table-row">
-                                                <td>
-                                                    {{ i.pid }}
-                                                    <a href="{% url 'studententabelle' %}" class="stretched-link"></a>
-                                                </td>
-                                                <td>{{ i.modul }}</td>
-                                                <td>{{ i.semester }}</td>
-                                                <td>{{ i.pruefer }}</td>
-                                                <td>{{ i.raumnummer }}</td>
-                                                <td>{{ i.dauer }}</td>
-                                                <td>{{ i.datum }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="checkbox-div my-3">
-                                <form>
-                                    <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                           onclick="history.back()">
-                                </form>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="checkbox-div my-3">
+                            <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
+                                   onclick="history.back()">
+                        </div>
                     </div>
                 </div>
             </div>

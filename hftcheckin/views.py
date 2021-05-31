@@ -1,19 +1,11 @@
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-
-# Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from hftcheckin.models import *
 from hftcheckin.forms import *
 from .forms import CreateUserForm
 from .forms import Pruefung
-from .models import Pruefung as Pruefungen
 from .decorators import allowed_users
 
 
@@ -83,14 +75,23 @@ def registrierung2(request):
 @allowed_users(allowed_roles=['Studenten'])
 def checkin(request):
     student = Student.objects.get(user=request.user)
-
     return render(request, 'hftchekin/checkin.html')
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def formular(request):
-    return render(request, 'hftchekin/formular.html')
+    # Checkin
+    student = Student.objects.get(user=request.user)
+    pid = request.POST.get('pid')
+    password = request.POST.get('password')
+    pruefungsdaten = student.pruefung_set.get(pid__exact=pid, passwort__exact=password)
+
+    context = {
+        'student': student,
+        'pruefungsdaten': pruefungsdaten,
+    }
+    return render(request, 'hftchekin/formular.html', context)
 
 
 def timer(request):
@@ -102,7 +103,6 @@ def timer(request):
 def studentkonto(request):
     student = Student.objects.get(user=request.user)
     context = {'student': student}
-
     return render(request, 'hftchekin/studentkonto.html', context)
 
 
@@ -111,14 +111,14 @@ def studentkonto(request):
 def professorkonto(request):
     professor = Professor.objects.get(user=request.user)
     context = {'professor': professor}
-
     return render(request, 'hftchekin/professorkonto.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
-    form = Pruefung()
+    professor = Professor.objects.get(user=request.user)
+    form = Pruefung(initial={'professor': professor})
     if request.method == 'POST':
         form = Pruefung(request.POST)
         if form.is_valid():
@@ -145,10 +145,11 @@ def pruefungstabelle(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def studententabelle(request):
-    # professor = Professor.objects.get(user=request.user)
-    # pruefung = professor.pruefung_set.all()
-    # context = {'pruefung': pruefung}
-    return render(request, 'hftchekin/studententabelle.html')
+    professor = Professor.objects.get(user=request.user)
+    pruefungen = professor.pruefung_set.all()
+    student = pruefungen.student.all()
+    context = {'student': student}
+    return render(request, 'hftchekin/studententabelle.html', context)
 
 
 @login_required(login_url='login')
