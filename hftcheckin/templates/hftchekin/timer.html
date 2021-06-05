@@ -12,67 +12,68 @@
                 <div class="row">
                     <div class="col my-5">
                         <!-- PRÜFUNGSDATEN -->
-                        <form action="" method="POST">
-                            <div class="card shadow-sm">
-                                <div class="card-header">Prüfungsdaten</div>
-                                <div class="card-body">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="fach" class="form-label">Prüfungsfach</label>
-                                            <input type="text" class="form-control" id="fach"
-                                                   placeholder="z.B. Mathematik" disabled>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="semester" class="form-label">Semester</label>
-                                            <input type="text" class="form-control" id="semester"
-                                                   placeholder="SoSe 2021" disabled>
-                                        </div>
+                        <div class="card shadow-sm">
+                            <div class="card-header">Prüfungsdaten</div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="fach" class="form-label">Prüfungsfach</label>
+                                        <input type="text" class="form-control" id="fach"
+                                               placeholder="{{ pruefung.modul }}" disabled>
                                     </div>
-                                    <br>
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="pruefer" class="form-label">Prüfer</label>
-                                            <input type="text" class="form-control" id="pruefer"
-                                                   placeholder="z.B. Prof. Dr. Stefan Knauth" disabled>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="datum" class="form-label">Datum</label>
-                                            <input type="date" class="form-control" id="datum" disabled>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <label for="semester" class="form-label">Semester</label>
+                                        <input type="text" class="form-control" id="semester"
+                                               placeholder="{{ pruefung.semester }}" disabled>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="pruefer" class="form-label">Prüfer</label>
+                                        <input type="text" class="form-control" id="pruefer"
+                                               placeholder="{{ pruefung.professor }}" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="datum" class="form-label">Datum</label>
+                                        <input type="date" class="form-control" id="datum" disabled>
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <!-- Stopuhr -->
-                            <div class="card shadow-sm">
-                                <div class="card-header">Zeit</div>
-                                <div class="col my-5">
-                                    <div class="card shadow-lg center" style="max-width: 35rem">
-                                        <!-- TIME -->
-                                        <div class="card-body text-center">
-                                            <div id="time" class="colored digit text-nowrap font-digit"
-                                                 style="font-size: 76px;"> 00:00:00
-                                            </div>
+                        </div>
+                        <br>
+                        <!-- Stopuhr -->
+                        <div class="card shadow-sm">
+                            <div class="card-header">Zeit</div>
+                            <div class="col my-5">
+                                <div class="card shadow-lg center" style="max-width: 35rem">
+                                    <!-- TIME -->
+                                    <div class="card-body text-center">
+                                        <div id="time" class="colored digit text-nowrap font-digit"
+                                             style="font-size: 76px;"> 00:00:00
                                         </div>
-                                        <div class="checkbox-div text-center my-2">
-                                            <!--
-                                            <button type="button" id="start_btn" onclick="start()"
-                                                    class="btn btn-outline-danger mt-2">
-                                                Start
-                                            </button>
-                                            -->
-                                            <!-- Button für stoppen der Zeit ersetzt siehe Zeile 76-79-->
-                                            <!--
-                                            <button type="button" id="pause_btn" onclick="pause()"
-                                                    class="btn btn-outline-danger mt-2">
-                                                Stop
-                                            </button>
-                                            -->
-                                        </div>
+                                    </div>
+                                    <div class="checkbox-div text-center my-2">
+                                        <!--
+                                        <button type="button" id="start_btn" onclick="start()"
+                                                class="btn btn-outline-danger mt-2">
+                                            Start
+                                        </button>
+                                        -->
+                                        <!-- Button für stoppen der Zeit ersetzt siehe Zeile 76-79-->
+                                        <!--
+                                        <button type="button" id="pause_btn" onclick="pause()"
+                                                class="btn btn-outline-danger mt-2">
+                                            Stop
+                                        </button>
+                                        -->
                                     </div>
                                 </div>
                             </div>
-                            <br>
+                        </div>
+                        <br>
+                        <form action="{% url 'geschriebenuebersicht' %}" method="POST">
+                            {% csrf_token %}
                             <!-- Fertig/Checkout & Timer stoppen-->
                             <!-- Timer stoppen testen: type="submit" zu type="button" ändern-->
                             <div class="text-center">

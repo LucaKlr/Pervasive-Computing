@@ -18,15 +18,15 @@ class StudentenDaten(ModelForm):
         fields = ['matrikelnummer', 'studiengang']
 
 
-class Pruefung(ModelForm):
+class PruefungCheckin(ModelForm):
+    class Meta:
+        model = Pruefung
+        fields = ['student']
+
+
+class PruefungForm(ModelForm):
     class Meta:
         model = Pruefung
         fields = '__all__'
         exclude = ['student']
         widgets = {'professor': forms.HiddenInput()}
-
-
-class PruefungCheckin(ModelForm):
-    class Meta:
-        model = Pruefung
-        fields = ['student']

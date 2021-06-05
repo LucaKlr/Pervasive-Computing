@@ -37,7 +37,6 @@
                                     <hr>
                                     <form action="{% url 'formular' %}" method="POST">
                                         {% csrf_token %}
-                                        {{ form | crispy }}
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="pid"
                                                    placeholder="12345" name="pid" required>
@@ -50,6 +49,7 @@
                                             <span class="fas fa-eye" id="eyeLogin" onclick="showpw()"></span>
                                             <label for="password">Passwort</label>
                                         </div>
+
                                         <div class="d-grid gap-2 mt-3">
                                             <button type="submit" class="btn btn-danger">Check-In</button>
                                         </div>

@@ -12,7 +12,7 @@
 {% endblock homenav %}
 
 {% block logoutnav %}
-    <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
 {% endblock logoutnav %}
 
 {% block body %}
@@ -38,9 +38,9 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>Pervasive Computing</td>
-                                            <td>90min</td>
-                                            <td>28.06.2021</td>
+                                            <td>{{ pruefung.modul }}</td>
+                                            <td>{{ pruefung.dauer}}</td>
+                                            <td>{% now 'd.m.Y' %}</td>
                                             <td>86min</td>
                                         </tr>
                                         </tbody>

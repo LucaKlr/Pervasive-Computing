@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from hftcheckin.forms import *
+from .filter import StudentenFilter, PruefungenFilter
 from .forms import CreateUserForm
-from .forms import Pruefung
+from .forms import PruefungForm
 from .decorators import allowed_users
 
 
@@ -74,17 +75,24 @@ def registrierung2(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def checkin(request):
-    student = Student.objects.get(user=request.user)
     return render(request, 'hftchekin/checkin.html')
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def formular(request):
-    # Checkin
+
+    # Daten nach dem POST Request abfangen
     student = Student.objects.get(user=request.user)
     pid = request.POST.get('pid')
     password = request.POST.get('password')
+
+    # Hole die Prüfung und füge den eingeloggten Studenten zur Prüfung hinzu
+    # pruefung = Pruefung.objects.get(pid__exact=pid, passwort__exact=password)
+    pruefung = get_object_or_404(Pruefung, pid__exact=pid, passwort__exact=password)
+    pruefung.student.add(student)
+
+    # Ausgabe der Prüfungs- und Studentendaten
     pruefungsdaten = student.pruefung_set.get(pid__exact=pid, passwort__exact=password)
 
     context = {
@@ -94,8 +102,13 @@ def formular(request):
     return render(request, 'hftchekin/formular.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
 def timer(request):
-    return render(request, 'hftchekin/timer.html')
+    student = Student.objects.get(user=request.user)
+    if request.method == 'POST':
+        return redirect('timer')
+    return render(request, 'hftchekin/timer.html', {'student': student})
 
 
 @login_required(login_url='login')
@@ -118,9 +131,9 @@ def professorkonto(request):
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
     professor = Professor.objects.get(user=request.user)
-    form = Pruefung(initial={'professor': professor})
+    form = PruefungForm(initial={'professor': professor})
     if request.method == 'POST':
-        form = Pruefung(request.POST)
+        form = PruefungForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('pruefungstabelle')
@@ -139,20 +152,31 @@ def professorhome(request):
 def pruefungstabelle(request):
     professor = Professor.objects.get(user=request.user)
     pruefungen = professor.pruefung_set.all()
-    return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen': pruefungen})
+
+    pruefungen_filter = PruefungenFilter(request.GET, queryset=pruefungen)
+    pruefung = pruefungen_filter.qs
+
+    context = {'pruefungen': pruefung, 'pruefungen_filter': pruefungen_filter}
+    return render(request, 'hftchekin/pruefungstabelle.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def studententabelle(request):
     professor = Professor.objects.get(user=request.user)
-    pruefungen = professor.pruefung_set.all()
-    student = pruefungen.student.all()
-    context = {'student': student}
+    studenten = Student.objects.filter(pruefung__professor=professor)
+
+    studenten_filter = StudentenFilter(request.GET, queryset=studenten)
+    student = studenten_filter.qs
+
+    context = {'studenten': student, 'studenten_filter': studenten_filter}
     return render(request, 'hftchekin/studententabelle.html', context)
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Profs'])
+@allowed_users(allowed_roles=['Studenten'])
 def geschriebenuebersicht(request):
+    student = Student.objects.get(user=request.user)
+    if request.method == 'POST':
+        return redirect('geschriebenuebersicht')
     return render(request, 'hftchekin/geschriebenuebersicht.html')

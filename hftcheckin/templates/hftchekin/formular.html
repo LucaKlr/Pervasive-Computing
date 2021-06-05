@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block logoutnav %}
-    <a href="#" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout <span class="fas fa-sign-out-alt"></span></a>
 {% endblock logoutnav %}
 
 {% block body %}
@@ -16,7 +16,8 @@
                 <div class="row">
                     <div class="col my-5">
                         <!-- PRÜFUNGSDATEN -->
-                        <form action="" method="POST">
+                        <form action="{% url 'timer' %}" method="POST">
+                            {% csrf_token %}
                             <div class="card shadow-sm">
                                 <div class="card-header">Prüfungsdaten</div>
                                 <div class="card-body">

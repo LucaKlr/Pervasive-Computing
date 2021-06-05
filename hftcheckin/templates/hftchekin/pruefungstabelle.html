@@ -23,6 +23,26 @@
             <div class="container">
                 <div class="row">
                     <div class="col my-5">
+                        <p>
+                            <button class="btn btn-danger" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                Filter
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body" style="max-width: 30rem">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    {{ pruefungen_filter.form | crispy }}
+                                    <button type="submit" class="btn btn-danger m-2"><span
+                                            class="fas fa-filter"></span>
+                                        Filtern
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
                         <h1>Prüfungstabelle</h1>
                         <br>
                         <div class="card shadow-sm">
@@ -42,11 +62,8 @@
                                     </thead>
                                     <tbody>
                                     {% for i in pruefungen %}
-                                        <tr data-href="{% url 'studententabelle' %}" class="table-row">
-                                            <td>
-                                                {{ i.pid }}
-                                                <a href="{% url 'studententabelle' %}" class="stretched-link"></a>
-                                            </td>
+                                        <tr class="table-row">
+                                            <td>{{ i.pid }}</td>
                                             <td>{{ i.modul }}</td>
                                             <td>{{ i.semester }}</td>
                                             <td>{{ i.pruefer }}</td>
