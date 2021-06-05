@@ -31,12 +31,12 @@
                                         <div class="card-body text-center">
                                             <label for="vorname" class="form-label">Vorname</label>
                                             <input type="text" class="form-control" id="vorname"
-                                                   placeholder="{{ request.user.first_name }}"
+                                                   placeholder="{{ professor.vorname }}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="nachname" class="form-label">Nachname</label>
-                                            <input type="text" class="form-control" id="nachname" placeholder="{{ request.user.last_name }}"
+                                            <input type="text" class="form-control" id="nachname" placeholder="{{ professor.nachname }}"
                                                    disabled>
                                         </div>
                                         <div class="card-body text-center">
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="card-body text-center">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email" placeholder="{{ request.user.email }}"
+                                            <input type="text" class="form-control" id="email" placeholder="{{ professor.email }}"
                                                    disabled>
                                         </div>
                                         <!--

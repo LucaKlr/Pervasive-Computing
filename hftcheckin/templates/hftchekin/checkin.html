@@ -1,4 +1,5 @@
 {% extends 'hftchekin/base_student.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 
 {% block title %}
@@ -34,19 +35,21 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Check-In</h5>
                                     <hr>
-                                    <form action="">
+                                    <form action="{% url 'formular' %}" method="POST">
+                                        {% csrf_token %}
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="floatingInput"
-                                                   placeholder="12345" required>
-                                            <label for="floatingInput">Prüfungs-ID</label>
+                                            <input type="text" class="form-control" id="pid"
+                                                   placeholder="12345" name="pid" required>
+                                            <label for="pid">Prüfungs-ID</label>
                                         </div>
                                         <div class="form-floating">
                                             <input type="password" class="form-control input-field"
-                                                   id="floatingPassword"
+                                                   id="password" name="password"
                                                    placeholder="Password" required>
                                             <span class="fas fa-eye" id="eyeLogin" onclick="showpw()"></span>
-                                            <label for="floatingPassword">Passwort</label>
+                                            <label for="password">Passwort</label>
                                         </div>
+
                                         <div class="d-grid gap-2 mt-3">
                                             <button type="submit" class="btn btn-danger">Check-In</button>
                                         </div>

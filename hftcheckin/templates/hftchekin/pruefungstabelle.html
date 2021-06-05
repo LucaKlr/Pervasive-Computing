@@ -14,7 +14,7 @@
 
 {% block kontonav %}
     <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
-    Konto</a>
+        Konto</a>
 {% endblock kontonav %}
 
 {% block body %}
@@ -23,29 +23,46 @@
             <div class="container">
                 <div class="row">
                     <div class="col my-5">
-                        <form method="GET">
-                            {% csrf_token %}
-                            {{ form | crispy }}
-                            <h1>Prüfungstabelle</h1>
-                            <br>
-                            <div class="card shadow-sm">
-                                <!-- Prüfungstabelle -->
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Modul</th>
-                                            <th scope="col">Semester</th>
-                                            <th scope="col">Prüfer/in</th>
-                                            <th scope="col">Raum</th>
-                                            <th scope="col">Dauer</th>
-                                            <th scope="col">Datum</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for i in pruefungen %}    
-                                        <tr>
+                        <p>
+                            <button class="btn btn-danger" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                Filter
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body" style="max-width: 30rem">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    {{ pruefungen_filter.form | crispy }}
+                                    <button type="submit" class="btn btn-danger m-2"><span
+                                            class="fas fa-filter"></span>
+                                        Filtern
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <h1>Prüfungstabelle</h1>
+                        <br>
+                        <div class="card shadow-sm">
+                            <!-- Prüfungstabelle -->
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Modul</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Prüfer/in</th>
+                                        <th scope="col">Raum</th>
+                                        <th scope="col">Dauer</th>
+                                        <th scope="col">Datum</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in pruefungen %}
+                                        <tr class="table-row">
                                             <td>{{ i.pid }}</td>
                                             <td>{{ i.modul }}</td>
                                             <td>{{ i.semester }}</td>
@@ -53,25 +70,16 @@
                                             <td>{{ i.raumnummer }}</td>
                                             <td>{{ i.dauer }}</td>
                                             <td>{{ i.datum }}</td>
-                                           <!-- <td>83123</td>
-                                            <td>Pervasive Computing</td>
-                                            <td>SoSe21</td>
-                                            <td>Herr Knauth</td>
-                                            <td>90min</td>
-                                            <td>28.06.2021</td> -->
                                         </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="checkbox-div my-3">
-                                <form>
-                                    <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
-                                           onclick="history.back()">
-                                </form>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="checkbox-div my-3">
+                            <input type="button" class="btn btn-outline-danger my-3" value="Zurück"
+                                   onclick="history.back()">
+                        </div>
                     </div>
                 </div>
             </div>

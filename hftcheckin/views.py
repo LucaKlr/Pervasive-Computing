@@ -1,19 +1,12 @@
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-
-# Create your views here.
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from hftcheckin.models import *
 from hftcheckin.forms import *
+from .filter import StudentenFilter, PruefungenFilter
 from .forms import CreateUserForm
-from .forms import Pruefung
-from .models import Pruefung as Pruefungen
+from .forms import PruefungForm
 from .decorators import allowed_users
 
 
@@ -88,11 +81,34 @@ def checkin(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Studenten'])
 def formular(request):
-    return render(request, 'hftchekin/formular.html')
+
+    # Daten nach dem POST Request abfangen
+    student = Student.objects.get(user=request.user)
+    pid = request.POST.get('pid')
+    password = request.POST.get('password')
+
+    # Hole die Prüfung und füge den eingeloggten Studenten zur Prüfung hinzu
+    # pruefung = Pruefung.objects.get(pid__exact=pid, passwort__exact=password)
+    pruefung = get_object_or_404(Pruefung, pid__exact=pid, passwort__exact=password)
+    pruefung.student.add(student)
+
+    # Ausgabe der Prüfungs- und Studentendaten
+    pruefungsdaten = student.pruefung_set.get(pid__exact=pid, passwort__exact=password)
+
+    context = {
+        'student': student,
+        'pruefungsdaten': pruefungsdaten,
+    }
+    return render(request, 'hftchekin/formular.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Studenten'])
 def timer(request):
-    return render(request, 'hftchekin/timer.html')
+    student = Student.objects.get(user=request.user)
+    if request.method == 'POST':
+        return redirect('timer')
+    return render(request, 'hftchekin/timer.html', {'student': student})
 
 
 @login_required(login_url='login')
@@ -100,7 +116,6 @@ def timer(request):
 def studentkonto(request):
     student = Student.objects.get(user=request.user)
     context = {'student': student}
-
     return render(request, 'hftchekin/studentkonto.html', context)
 
 
@@ -109,16 +124,16 @@ def studentkonto(request):
 def professorkonto(request):
     professor = Professor.objects.get(user=request.user)
     context = {'professor': professor}
-
     return render(request, 'hftchekin/professorkonto.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungsregistrierung(request):
-    form = Pruefung()
+    professor = Professor.objects.get(user=request.user)
+    form = PruefungForm(initial={'professor': professor})
     if request.method == 'POST':
-        form = Pruefung(request.POST)
+        form = PruefungForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('pruefungstabelle')
@@ -135,17 +150,33 @@ def professorhome(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def pruefungstabelle(request):
-    pruefungen = Pruefungen.objects.all()
-    return render(request, 'hftchekin/pruefungstabelle.html', {'pruefungen': pruefungen})
+    professor = Professor.objects.get(user=request.user)
+    pruefungen = professor.pruefung_set.all()
+
+    pruefungen_filter = PruefungenFilter(request.GET, queryset=pruefungen)
+    pruefung = pruefungen_filter.qs
+
+    context = {'pruefungen': pruefung, 'pruefungen_filter': pruefungen_filter}
+    return render(request, 'hftchekin/pruefungstabelle.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Profs'])
 def studententabelle(request):
-    return render(request, 'hftchekin/studententabelle.html')
+    professor = Professor.objects.get(user=request.user)
+    studenten = Student.objects.filter(pruefung__professor=professor)
+
+    studenten_filter = StudentenFilter(request.GET, queryset=studenten)
+    student = studenten_filter.qs
+
+    context = {'studenten': student, 'studenten_filter': studenten_filter}
+    return render(request, 'hftchekin/studententabelle.html', context)
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Profs'])
+@allowed_users(allowed_roles=['Studenten'])
 def geschriebenuebersicht(request):
+    student = Student.objects.get(user=request.user)
+    if request.method == 'POST':
+        return redirect('geschriebenuebersicht')
     return render(request, 'hftchekin/geschriebenuebersicht.html')

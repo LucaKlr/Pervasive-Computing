@@ -1,4 +1,5 @@
 {% extends 'hftchekin/base_professor.html' %}
+{% load crispy_forms_filters %}
 {% load static %}
 
 {% block title %}
@@ -13,19 +14,42 @@
 
 {% block kontonav %}
     <a href="{% url 'professorkonto' %}" class="btn btn-outline-danger"><span class="fas fa-user-circle"></span>
-    Konto</a>
+        Konto</a>
 {% endblock kontonav %}
 
 {% block body %}
     <main>
         <section>
             <div class="container">
+
                 <div class="row">
                     <div class="col my-5">
+                        <p>
+                            <button class="btn btn-danger" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                Filter
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body" style="max-width: 30rem">
+                                <form method="GET">
+                                    {% csrf_token %}
+                                    {{ studenten_filter.form | crispy }}
+                                    <button type="submit" class="btn btn-danger m-2"><span
+                                            class="fas fa-filter"></span>
+                                        Filtern
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
                         <form action="" method="POST">
                             <h1>Studententabelle</h1>
                             <br>
                             <div class="card shadow-sm">
+
+
                                 <!-- Studententabelle -->
                                 <div class="table-responsive">
                                     <table class="table table-hover table-striped">
@@ -34,22 +58,22 @@
                                             <th scope="col">Matrikelnummer</th>
                                             <th scope="col">Vorname</th>
                                             <th scope="col">Nachname</th>
-                                            <th scope="col">Studienfach</th>
+                                            <th scope="col">Studiengang</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Raumnummer</th>
                                             <th scope="col">Teilname bestätigt?</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>357 902</td>
-                                            <td>Max</td>
-                                            <td>Mustermann</td>
-                                            <td>Wirtschaftsinformatik</td>
-                                            <td>81muma1bwi@hft-stuttgart.de</td>
-                                            <td>2/231</td>
-                                            <td>Ja</td>
-                                        </tr>
+                                        {% for i in studenten %}
+                                            <tr>
+                                                <td>{{ i.matrikelnummer }}</td>
+                                                <td>{{ i.vorname }}</td>
+                                                <td>{{ i.nachname }}</td>
+                                                <td>{{ i.studiengang }}</td>
+                                                <td>{{ i.email }}</td>
+                                                <td>Ja</td>
+                                            </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
